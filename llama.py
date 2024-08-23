@@ -4,7 +4,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AdamW,AutoModelForCausalLM
 
 # model_path = r'C:\Users\Sakshi Shewale\OneDrive\Desktop\gguf\llama-2-7b.Q4_K_M.gguf'
-model_name="/home/bh289/Documents/clg/sem 7/bash_assistant/CodeLlama-7b-hf-local"
+model_name="/home/bh289/Documents/clg/sem 7/bash_assistant/starcoderbase-local"
 
 
 model = AutoModelForCausalLM.from_pretrained(model_name)
@@ -21,8 +21,11 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 # prompt = "What is the capital of France?"
 # output = llm(prompt)
 
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
+
 # print(output)
-with open('data_train.json', 'r') as file:
+with open('data_test.json', 'r') as file:
     data = json.load(file)
 # Extract
 input_texts = [d['nl_command'] for d in data]
