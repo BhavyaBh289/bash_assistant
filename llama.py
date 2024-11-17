@@ -37,7 +37,7 @@ inputs = tokenizer(input_texts, return_tensors="pt", padding=True, truncation=Tr
 outputs = tokenizer(output_texts, return_tensors="pt", padding=True, truncation=True, max_length=512)
 
 lora_config = LoraConfig(
-    task_type=TaskType.CAUSAL_LM,  # Since you're working with a language model
+    task_type=TaskType.CAUSAL_LM,
     r=16,
     lora_alpha=32,
     lora_dropout=0.1,

@@ -1,3 +1,5 @@
 venv
 CodeLlama-7b-hf-local
 starcoderbase-local
+*.safetensors
+*.zip
