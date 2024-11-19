@@ -12,7 +12,7 @@ if tokenizer.pad_token is None:
     tokenizer.pad_token = tokenizer.eos_token
 
 # Input command
-input_text = "Create a new directory named 'test_dir' and navigate into it"
+input_text = "Find all files in the current directory tree that are not newer than some_file"
 
 # Tokenize input
 inputs = tokenizer(input_text, return_tensors="pt", padding=True, truncation=True, max_length=512).to(device)

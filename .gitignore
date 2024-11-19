@@ -3,3 +3,5 @@ CodeLlama-7b-hf-local
 starcoderbase-local
 *.safetensors
 *.zip
+*.pth
+codellama-fine-tuned*
