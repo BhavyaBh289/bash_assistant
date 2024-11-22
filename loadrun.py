@@ -1,21 +1,24 @@
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Load tokenizer
 tokenizer = AutoTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
 tokenizer.pad_token = tokenizer.eos_token
 
-# Load the base model with quantization config
-bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype="float16", bnb_4bit_use_double_quant=True
-)
-
+# Load the base model without quantization
 model = AutoModelForCausalLM.from_pretrained(
-    "codellama/CodeLlama-7b-hf", quantization_config=bnb_config, device_map="auto"
+    "codellama/CodeLlama-7b-hf",
+    device_map="cpu",  # Ensure the model runs on CPU
+    torch_dtype=torch.float32  # Use 32-bit floats for compatibility
 )
 
 # Load the fine-tuned weights
-model.load_state_dict(torch.load('models/codellama-fine-tuned-nl2bash.pth', map_location="cpu"))
+model.load_state_dict(
+    torch.load(
+        '/home/bh289/Documents/clg/sem 7/bash_assistant/codellama-fine-tuned-epoc3-nl2bash.pth',
+        map_location="cpu"
+    )
+)
 
 # Ensure the model is in evaluation mode
 model.eval()

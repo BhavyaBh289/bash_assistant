@@ -5,3 +5,6 @@ starcoderbase-local
 *.zip
 *.pth
 codellama-fine-tuned*
+*.bin
+swapfile
+*.model
