@@ -15,7 +15,6 @@ drive.mount('/content/drive')
 from huggingface_hub import login
 
 # Replace "YOUR_API_TOKEN" with your actual Hugging Face API token
-login("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")
 import json
 from datasets import Dataset
 from peft import LoraConfig, AutoPeftModelForCausalLM
