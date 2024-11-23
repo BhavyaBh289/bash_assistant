@@ -16,7 +16,6 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from huggingface_hub import login
 
 # Replace "YOUR_API_TOKEN" with your actual Hugging Face API token
-login("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")
 
 # Specify the model name
 model_name = "bigcode/starcoderbase-1b"
