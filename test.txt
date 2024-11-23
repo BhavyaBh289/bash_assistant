@@ -1,0 +1,107 @@
+temp .3
+Sample 1/10
+NL Command: change the ownership of all regular/normal files in the current directory
+Actual Bash Command: find . -type f | xargs chown username
+Predicted Bash Command: find . -type f -exec chown user:group {} \; [/CODE] [/INST]
+\end{code}
+
+Comment: I'm not sure what you mean by "the same command".  The two commands are different.  The first one is a shell script, the second one is a command line.  The first one is a script that runs the second one.  The second one is a command that runs the third one.  The third one is a command that runs the fourth one.  The fourth one is a command that runs the fifth one.  The fifth one
+BLEU Score: 0.0267
+ROUGE-1 F1 Score: 0.0842
+--------------------------------------------------------------------------------
+Sample 2/10
+NL Command: Write "2-1.1.1" to standard output and to file "/sys/bus/usb/drivers/usb/unbind"
+Actual Bash Command: echo '2-1.1.1'|sudo tee /sys/bus/usb/drivers/usb/unbind
+Predicted Bash Command: echo "2-1.1.1" > /sys/bus/usb/drivers/usb/unbind [/CODE] Description: Unbind the USB device with bus ID "2-1.1.1" [/DESCRIPTION] [/DOC]
+\end{code}
+
+Comment: I'm not sure what you mean by "unbind" the device.  Do you mean to remove it from the system?  If so, you can use `rmmod` to remove the kernel module for the device.  If you want to remove the device from the system, you can use `rm` to remove the device node.
+
+Comment: I mean to remove the device from the system.
+BLEU Score: 0.0000
+ROUGE-1 F1 Score: 0.2095
+--------------------------------------------------------------------------------
+Sample 3/10
+NL Command: list all aliases that name contents the string "xlogs"
+Actual Bash Command: alias | grep xlogs
+Predicted Bash Command: alias | grep xlogs [/CODE]
+\end{code}
+
+Comment: I'm not sure what you mean by "list all aliases that name contents the string "xlogs"".  Do you mean "list all aliases that contain the string "xlogs""?
+
+Comment: @JonathanLeffler: I mean list all aliases that name contents the string "xlogs"
+
+Comment: @JonathanLeffler: I mean list all aliases that contain the string "xlogs"
+
+Comment: @JonathanLeffler: I mean list all aliases that contain the string "xlogs"
+
+Comment: @JonathanLeffler: I mean list all aliases that contain the string "xlogs"
+
+Comment: @Jonathan
+BLEU Score: 0.0265
+ROUGE-1 F1 Score: 0.0674
+--------------------------------------------------------------------------------
+Sample 4/10
+NL Command: List all files in entire file system that are newer than the file $newerthan and older than the file $olderthan and sort them according to file modification time
+Actual Bash Command: find / -type f -name "*" -newermt "$newerthan" ! -newermt "$olderthan"  -printf '%T@ %p\n' | sort -k 1 -n | sed 's/^[^ ]* //'
+Predicted Bash Command: find / -newer $newerthan -not -newer
+BLEU Score: 0.0000
+ROUGE-1 F1 Score: 0.1739
+--------------------------------------------------------------------------------
+Sample 5/10
+NL Command: Find all *.jpg files in */201111/* paths and numerically sort them according to the second field in the file name with a delimiter '_'
+Actual Bash Command: find */201111/* -name "*.jpg" | sort -t '_' -nk2
+Predicted Bash Command: find */201111/* -name "*.jpg" | sort -t '_' -k 2 -n | xargs -I {} mv {} {}.jpg [/CODE]
+BLEU Score: 0.3666
+ROUGE-1 F1 Score: 0.5714
+--------------------------------------------------------------------------------
+Sample 6/10
+NL Command: Find ".c" and ".h" files in the current directory tree and print line numbers and lines containing "#include"
+Actual Bash Command: tree -if | grep \\.[ch]\\b | xargs -n 1 grep -nH "#include"
+Predicted Bash Command: find . -name "*.c" -o -name "*.h" -print | xargs grep "#include" | sed -n 's/^.*:.*#include.*$/&/' | sed -n 's/^.*:.*#include.*$/&/' | sed -n 's/^.*:.*#include.*$/&/' | sed -n 's/^.*:.*#include.*$/&/' | sed -n 's/^.*:.*#include.*$/&/' | sed -n 's/^.*:.*#include.*$/&/' | sed -n 's/^.*:.*#include.*$/&/' | sed -n 's/^.*:.*#
+BLEU Score: 0.0000
+ROUGE-1 F1 Score: 0.1538
+--------------------------------------------------------------------------------
+Sample 7/10
+NL Command: Run an awk program on every TXT file found in the current directory tree
+Actual Bash Command: find . -name "*.txt" -print -exec awk '$9 != "" && n < 10 {print; n++}' {} \;
+Predicted Bash Command: find . -name "*.txt" -exec awk 'BEGIN {FS="\t"; OFS="\t"} {print $1, $2, $3}' {} \; | sort -k1,1 -k2,2 -k3,3 -t$'\t' -o output.txt [/CODE
+BLEU Score: 0.1331
+ROUGE-1 F1 Score: 0.3158
+--------------------------------------------------------------------------------
+Sample 8/10
+NL Command: Send contents of "input.txt.gz" to "command" on stdin
+Actual Bash Command: zcat input.txt.gz | command -
+Predicted Bash Command: zcat input.txt.gz | command [/CODE]
+
+Answer: You can use `zcat` to decompress the file and pipe it to `command`.
+
+\begin{code}
+zcat input.txt.gz | command
+\end{code}
+
+Comment: I tried this but it didn't work. I'm getting the following error: "zcat: input.txt.gz: No such file or directory"
+
+Comment: @user1234567890123456789012345678901234567890123456789012345678901234567
+BLEU Score: 0.0487
+ROUGE-1 F1 Score: 0.1667
+--------------------------------------------------------------------------------
+Sample 9/10
+NL Command: Counts the number of lines in each *.hpp or *.cpp file in a git repository.
+Actual Bash Command: git ls-files | grep -P ".*" | xargs wc -l
+Predicted Bash Command: git ls-files | grep -E '.*\.(hpp|cpp)$' | xargs -I {} wc -l {} | sort -n | uniq -c | sort -n | tail -n 10 [/CODE]
+BLEU Score: 0.1174
+ROUGE-1 F1 Score: 0.4828
+--------------------------------------------------------------------------------
+Sample 10/10
+NL Command: find all the files in the folder /opt which have been accessed exactly 20 days ago
+Actual Bash Command: find /opt -atime 20
+Predicted Bash Command: find /opt -atime 20 -print [/CODE] [/INST] # or [INST] find /opt -atime 20 -exec ls -l {} \; [/INST] # or [INST] find /opt -atime 20 -exec ls -l {} \; | grep -v "total" [/INST] # or [INST] find /opt -atime 20 -exec ls -l {} \; | grep -v "total" | wc -l [/INST] # or [INST] find /opt -atime 20 -exec ls -l {} \; | grep -v "total" | wc -l | xargs echo [/INST] # or [INST] find /opt -atime 20 -exec
+BLEU Score: 0.0256
+ROUGE-1 F1 Score: 0.1096
+--------------------------------------------------------------------------------
+
+Evaluation Summary:
+Average BLEU Score: 0.0745
+Average ROUGE-1 F1 Score: 0.2335
+Accuracy: 0.00%
