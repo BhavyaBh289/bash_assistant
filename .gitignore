@@ -8,3 +8,6 @@ codellama-fine-tuned*
 *.bin
 swapfile
 *.model
+*.lock
+*blobs
+*main
